@@ -1,0 +1,72 @@
+name: AISchedulingApp
+organizationName: AI Scheduling
+bundleIdPrefix: com.aischeduling
+
+settings:
+  DEVELOPMENT_TEAM: ""
+  CODE_SIGN_IDENTITY: ""
+  CODE_SIGN_STYLE: Automatic
+
+options:
+  bundleIdPrefix: com.aischeduling
+  deploymentTarget:
+    iOS: "14.0"
+  minimumXcodeGenVersion: 2.35
+
+targets:
+  AISchedulingApp:
+    type: application
+    platform: iOS
+    deploymentTarget: "14.0"
+    sources:
+      - path: .
+        includes:
+          - "*.swift"
+          - "Models/**"
+          - "Views/**"
+          - "ViewModels/**"
+          - "Services/**"
+          - "Utilities/**"
+          - "CoreData/**"
+        excludes:
+          - README.md
+          - INSTALL.md
+          - LICENSE
+          - .env*
+          - project.yml
+
+    settings:
+      PRODUCT_NAME: AISchedulingApp
+      SWIFT_VERSION: 5.5
+      MARKETING_VERSION: 1.0.0
+      CURRENT_PROJECT_VERSION: 1
+      IPHONEOS_DEPLOYMENT_TARGET: 14.0
+      TARGETED_DEVICE_FAMILY: "1"
+      ENABLE_BITCODE: false
+      GCC_WARN_ABOUT_RETURN_TYPE: YES
+      GCC_WARN_UNINITIALIZED_AUTOS: YES
+
+    info:
+      path: Info.plist
+      properties:
+        CFBundleShortVersionString: 1.0.0
+        CFBundleVersion: 1
+        UIMainStoryboardFile: ""
+        UILaunchStoryboardName: LaunchScreen
+        NSAppTransportSecurity:
+          NSAllowsArbitraryLoads: true
+        NSLocalNetworkUsageDescription: "This app needs access to local network for scheduling"
+        NSBonjourServiceTypes:
+          - _http._tcp
+          - _https._tcp
+
+    dependencies:
+      - framework: Foundation
+      - framework: SwiftUI
+      - framework: Combine
+      - framework: CoreData
+
+    preBuildScripts:
+      - name: Check Swift Version
+        script: echo "Building with Swift..."
+        showEnvVars: false
