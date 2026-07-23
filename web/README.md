@@ -36,12 +36,26 @@ vercel --prod   # production deploy
 
 Set `ANTHROPIC_API_KEY` in the Vercel project's Environment Variables settings (Project → Settings → Environment Variables) — do this before the first `vercel --prod` deploy, or the `/api/schedule` route will fail.
 
+## AI Providers
+
+The backend supports three configurable AI providers for scheduling recommendations:
+
+1. **Claude API** (default, recommended) — best quality, structured outputs
+2. **HuggingFace Inference API** — free tier available, cloud-hosted
+3. **Ollama** — free, run open models locally (Mistral, Llama 2)
+
+Set `AI_PROVIDER` environment variable to switch. See `DEPLOYMENT.md` for full setup instructions.
+
 ## Architecture
 
 - **Frontend**: React + Vite SPA, tasks persisted in `localStorage` (no database).
-- **Backend**: A single Vercel serverless function (`api/schedule.js`) that calls the Claude API (`claude-opus-4-8`) with structured outputs to return scheduling recommendations as JSON.
+- **Backend**: A single Vercel serverless function (`api/schedule.js`) with pluggable AI provider support.
 - **Base path**: `vite.config.js` sets `base: '/agent/'` so the built assets resolve correctly when served under `rebaneado.com/agent`. Change this if you deploy at a different path or the domain root.
 
-## Routing this under rebaneado.com/agent
+## Deploying to Vercel
 
-This app is meant to be reachable at `rebaneado.com/agent`. Since `rebaneado.com` is a separate existing project, wiring the path requires editing *that* project's Vercel config (a `rewrites` entry pointing `/agent/(.*)` at this deployment's URL) — see the main chat thread for the exact steps once this is deployed.
+See `DEPLOYMENT.md` for complete deployment instructions, including:
+- How to set up each AI provider
+- Environment variables for production
+- Local development with each provider
+- Routing configuration under rebaneado.com/agent
