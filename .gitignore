@@ -1,0 +1,36 @@
+# Xcode
+*.pbxproj
+*.xcworkspace
+xcuserdata/
+*.xcscheme
+DerivedData/
+Build/
+.DS_Store
+
+# Swift
+.build/
+*.swiftpm/xcode
+.swiftpm/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Environment
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+*.swp
+*.swo
+*~
+.AppleDouble
+.LSOverride
+
+# Build artifacts
+*.app
+*.ipa
